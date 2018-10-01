@@ -38,7 +38,7 @@ train_all <-cbind(train_subject,train_activity,train_t)
 #Merges the training and the test sets to create one data set
 all <-rbind(test_all,train_all)
 
-#remove data frames from memmory to save space
+#remove data frames from memory to save space
 rm(test_set_d, test_activity, test_subject,train_t, train_activity, train_subject, test_all, train_all)
 
 ###############################STEP 2##############################
