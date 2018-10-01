@@ -102,5 +102,5 @@ colnames(tidy_data) <- y
 #From the data set in step 4, creates a second, independent tidy data set with the average 
 #of each variable for each activity and each subject.
 
-tidy_data2 <- tidy_data[,-c(1)]
-x <- tidy_data2 %>% group_by(activity) %>% summarise_all(funs(mean))
+
+x <- tidy_data %>% group_by(subject_id,activity) %>% summarise_all(funs(mean))
