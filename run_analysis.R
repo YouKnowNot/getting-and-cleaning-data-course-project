@@ -36,7 +36,7 @@ train_all <-cbind(train_subject,train_activity,train_t)
 
 ###############################STEP 2##############################
 #Merges the training and the test sets to create one data set
-tidy_data <-rbind(test_all,train_all)
+all <-rbind(test_all,train_all)
 
 #remove data frames from memmory to save space
 rm(test_set_d, test_activity, test_subject,train_t, train_activity, train_subject, test_all, train_all)
@@ -45,15 +45,15 @@ rm(test_set_d, test_activity, test_subject,train_t, train_activity, train_subjec
 #Extracts the index of the columns for mean and std.
 lb <- c(1,2) #keep first two lables
 j <- 3 #start from the third label
-for (i in 3:length(lbls)){ ##search from third label onwards
- if(grepl("std", lbls[i]) | grepl("mean", lbls[i])){ 
-     #print("TRUE")
+int_lbs <- colnames(all) 
+for (i in 3:length(int_lbs)){ ##search from third label onwards
+ if(grepl("std", int_lbs[i]) | grepl("mean", int_lbs[i])){ 
      lb[j] <- i
      j=j+1
         }
 }
 #filter data to only include the mean and std columns
-tidy_data <- tidy_data[,lb]
+tidy_data <- all[,lb]
 
 ###############################STEP 4##############################
 #Uses descriptive activity names to name the activities in the data set
@@ -72,7 +72,7 @@ tidy_data[f,2] <- "SITTING"
 f <- tidy_data[,2] == 5 
 tidy_data[f,2] <- "STANDING"
 
-f <- tidy_data[,c2] == 6
+f <- tidy_data[,2] == 6
 tidy_data[f,2] <- "LAYING"
 
 colnames(tidy_data)[1] <- "subject_id"
